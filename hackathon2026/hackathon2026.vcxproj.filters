@@ -20,15 +20,11 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-
     <Text Include="CanYouC.txt">
       <Filter>Resource Files</Filter>
     </Text>
-
     <Text Include="zack.txt" />
-
     <Text Include="noah.txt" />
-
-
+    <Text Include="CText.txt" />
   </ItemGroup>
 </Project>
