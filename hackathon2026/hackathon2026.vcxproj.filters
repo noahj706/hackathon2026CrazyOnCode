@@ -20,6 +20,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+
     <Text Include="zack.txt" />
+
+    <Text Include="noah.txt" />
+
   </ItemGroup>
 </Project>
