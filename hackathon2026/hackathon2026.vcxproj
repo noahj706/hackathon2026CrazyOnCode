@@ -133,6 +133,7 @@
     <ClCompile Include="gui.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="Tree.c" />
+    <ClCompile Include="treeminus.c" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="noah.txt" />
@@ -141,6 +142,7 @@
     <ClInclude Include="parent.h" />
     <ClInclude Include="gui.h" />
     <ClInclude Include="lib\raygui-4.0\src\raygui.h" />
+    <ClInclude Include="treeminus.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
