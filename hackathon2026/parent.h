@@ -35,7 +35,7 @@ typedef struct FolderNode
 } FolderNode;
 
 // Function prototypes
-FolderNode* createNode(char* name);
+FolderNode* createFolderNode(char* name);
 void addChild(struct FolderNode* parent, struct FolderNode* child);
 void createFolders(struct FolderNode* root, char* parentPath);
 void freeFolderTree(FolderNode* node);

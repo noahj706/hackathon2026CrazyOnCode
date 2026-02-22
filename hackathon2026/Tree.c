@@ -1,6 +1,6 @@
 #include "gui.h"
 #include "parent.h"
-FolderNode* createNode(char* name)
+FolderNode* createFolderNode(char* name)
 {
     struct FolderNode* newNode = (struct FolderNode*)malloc(sizeof(struct FolderNode));
     if (newNode == NULL) 
@@ -71,7 +71,7 @@ FolderNode** createFirstDepthNodes(int count)
     for (int i = 0; i < count; i++) 
     {
         sprintf(folderName, "Feature_%d", i + 1);
-        nodes[i] = createNode(folderName);
+        nodes[i] = createFolderNode(folderName);
     }
 
     return nodes;
@@ -131,7 +131,7 @@ void test_folders()
 {
     int userChoice;
     int firstDepthCount;
-    FolderNode* root = createNode("Projekt");
+    FolderNode* root = createFolderNode("Projekt");
 
     /*printf("Choose folder structure size:\n");
     printf("1. Small (3 first-depth folders)\n");
