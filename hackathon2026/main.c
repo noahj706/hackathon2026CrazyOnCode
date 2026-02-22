@@ -1,16 +1,17 @@
 #include "file_in_node.h"
 
+//IMPLAMENT LIKE THIS 
+//-----------------------------------
+#define RAYGUI_IMPLEMENTATION
+#include "gui.h"
+// 
+//buttonMenu();//outputs 1-3 size
+//....
+//finalMenu();//pair with return 0;
 int main()
 {
-    srand(time(NULL));  
-
-    int num_strings = 10;
-    char* filename = "random.txt";
-
-    int written = Generate_Random_Strings(num_strings, filename);
-
-    //In terminal, prints that our program sueefully ran
-    printf("Successfully wrote %d sentences to %s\n", written, filename);
-
+   buttonMenu();//outputs 1-3 size
+   //....
+   finalMenu();//pair with return 0;   
     return 0;
 }
