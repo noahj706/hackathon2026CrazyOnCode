@@ -6,7 +6,8 @@
 #include <string.h>
 #include <assert.h>
 #include <stdlib.h>
-#include <time.h>  // For random folder names
+#include <time.h> 
+#define ZERO 0
 #define SMALL 1
 #define MEDIUM 2
 #define LARGE 3
@@ -27,4 +28,5 @@ FolderNode** createFirstDepthNodes(int count);
 void destroyFirstDepthNodes(FolderNode** nodes, int count);
 void connectRootToFirstDepth(FolderNode* root, FolderNode* firstDepthNodes[], int numberOfFirstDepthNodes);
 void test_folders();
+//void processEachFolderWithTree(FolderNode** folders, int count, char* basePath);
 #endif

@@ -138,6 +138,10 @@ void test_folders()
     case LARGE:
         firstDepthCount = 15;
         break;
+    case ZERO:
+        freeFolderTree(root);
+        return 0;
+        break;
     default:
         printf("Invalid choice. Defaulting to Small.\n");
         firstDepthCount = 3;
@@ -157,17 +161,104 @@ void test_folders()
     // Connect them to root
     connectRootToFirstDepth(root, firstDepthNodes, firstDepthCount);
 
-
+    //processEachFolderWithTree(firstDepthNodes, firstDepthCount, "./Root");
     // Create the actual folders on disk
     printf("\nCreating actual folder structure on disk:\n");
     createFolders(root, ".");
 
     // Clean up memory
     freeFolderTree(root);
-    // Note: firstDepthNodes is already freed as part of the tree
+
 
     printf("\nFolder structure created successfully!\n");
 }
 
+/*void processEachFolderWithTree(FolderNode** folders, int count, char* basePath)
+{
+    printf("\n=== Creating Tree Structures for Each First-Depth Folder ===\n");
 
+    // Allocate array to store tree pointers for each folder
+    Tree** folderTrees = (Tree**)malloc(count * sizeof(Tree*));
+    if (folderTrees == NULL) {
+        printf("Failed to allocate memory for tree pointers\n");
+        return;
+    }
+
+    for (int i = 0; i < count; i++) 
+    {
+        char folderPath[256];
+        sprintf(folderPath, "%s/%s", basePath, folders[i]->name);
+
+        printf("\n[Folder %d: %s]\n", i + 1, folders[i]->name);
+        printf("  Path: %s\n", folderPath);
+
+        // OPTION 1: If they have a function that creates a tree from a path
+        // This assumes their function returns a Tree* pointer
+        folderTrees[i] = OtherTree_CreateFromPath(folderPath);
+
+        if (folderTrees[i] != NULL) {
+            printf("  ✓ Tree created successfully for %s\n", folders[i]->name);
+            printf("  Tree pointer (pTree): %p\n", (void*)folderTrees[i]);
+
+            // OPTION 2: If they need to add data to their tree
+            // OtherTree_AddFolderData(folderTrees[i], folders[i]);
+
+            // OPTION 3: If they need to process subfolders
+            if (folders[i]->numberOfChildren > 0) 
+            {
+                printf("  This folder has %d subfolders that can be added to the tree\n",
+                    folders[i]->numberOfChildren);
+
+                // Example of adding subfolders to their tree
+                for (int j = 0; j < folders[i]->numberOfChildren; j++) 
+                {
+                    char subPath[256];
+                    sprintf(subPath, "%s/%s", folderPath, folders[i]->children[j]->name);
+                    printf("    Adding subfolder: %s\n", folders[i]->children[j]->name);
+
+                    // Call their function to add a child to the tree
+                    // OtherTree_AddChild(folderTrees[i], folders[i]->children[j]->name, subPath);
+                }
+            }
+
+            // OPTION 4: If they have a function to process the entire tree
+            // OtherTree_Process(folderTrees[i]);
+
+        }
+        else 
+        {
+            printf("  ✗ Failed to create tree for %s\n", folders[i]->name);
+        }
+
+        printf("  ----------------------------------------\n");
+    }
+
+    // Now all trees are created, you can work with them
+
+    // Example: Access each folder's tree
+    printf("\n=== Summary of Created Trees ===\n");
+    for (int i = 0; i < count; i++) 
+    {
+        if (folderTrees[i] != NULL) 
+        {
+            printf("Folder %d: %s - Tree at %p\n",
+                i + 1, folders[i]->name, (void*)folderTrees[i]);
+        }
+    }
+
+    // Later, when done, free all the trees
+    printf("\n=== Cleaning Up Trees ===\n");
+    for (int i = 0; i < count; i++) 
+    {
+        if (folderTrees[i] != NULL) 
+        {
+            // Call their free function
+            // OtherTree_Free(folderTrees[i]);
+            printf("Freed tree for Folder %d\n", i + 1);
+        }
+    }
+
+    free(folderTrees);
+}
+*/
 
