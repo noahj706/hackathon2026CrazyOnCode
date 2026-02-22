@@ -1,3 +1,18 @@
+// Author: Angelo
+// Implment the following function call below to main
+// test_folders() or
+/*
+ #define RAYGUI_IMPLEMENTATION
+ #include "gui.h"
+ #include "parent.h"
+ int main(void)
+ {
+	test_folders();
+	finalMenu();
+	return 0;
+ }
+*/
+
 #define _CRT_SECURE_NO_WARNINGS
 #ifndef PARENT_H
 #define PARENT_H
@@ -28,5 +43,6 @@ FolderNode** createFirstDepthNodes(int count);
 void destroyFirstDepthNodes(FolderNode** nodes, int count);
 void connectRootToFirstDepth(FolderNode* root, FolderNode* firstDepthNodes[], int numberOfFirstDepthNodes);
 void test_folders();
+void createRandomTextFile(char* folderPath);
 //void processEachFolderWithTree(FolderNode** folders, int count, char* basePath);
 #endif
