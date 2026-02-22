@@ -19,7 +19,6 @@
 // ------- INCLUDE LIBRARIES -------
 #include <stdio.h>
 #include <stdlib.h>
-#include <windows.h>
 #include <direct.h>
 #include <time.h>
 

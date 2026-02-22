@@ -43,6 +43,7 @@ FolderNode** createFirstDepthNodes(int count);
 void destroyFirstDepthNodes(FolderNode** nodes, int count);
 void connectRootToFirstDepth(FolderNode* root, FolderNode* firstDepthNodes[], int numberOfFirstDepthNodes);
 void test_folders();
-void createRandomTextFile(char* folderPath);
-//void processEachFolderWithTree(FolderNode** folders, int count, char* basePath);
+//void freeTree(Node* pNode);
+//void createRandomTextFile(char* folderPath);
+void processEachFolderWithTree(FolderNode** folders, int count, char* basePath);
 #endif

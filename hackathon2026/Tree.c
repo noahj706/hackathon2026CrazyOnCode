@@ -1,5 +1,7 @@
 #include "gui.h"
 #include "parent.h"
+#include "treeminus.h"
+
 FolderNode* createFolderNode(char* name)
 {
     struct FolderNode* newNode = (struct FolderNode*)malloc(sizeof(struct FolderNode));
@@ -129,16 +131,8 @@ void freeFolderTree(FolderNode* node)
 
 void test_folders()
 {
-    int userChoice;
     int firstDepthCount;
     FolderNode* root = createFolderNode("Projekt");
-
-    /*printf("Choose folder structure size:\n");
-    printf("1. Small (3 first-depth folders)\n");
-    printf("2. Medium (5 first-depth folders)\n");
-    printf("3. Large (7 first-depth folders)\n");
-    printf("Enter your choice (1-3): ");
-    scanf("%d", &userChoice);*/
 
     // Determine first depth count based on user choice
     switch (buttonMenu())
@@ -154,12 +148,10 @@ void test_folders()
         break;
     case ZERO:
         freeFolderTree(root);
-        return 0;
-        break;
+        return;
     default:
         printf("Invalid choice. Defaulting to Small.\n");
         firstDepthCount = 3;
-        userChoice = SMALL;
     }
 
     printf("\nCreating %d first-depth folders...\n", firstDepthCount);
@@ -169,23 +161,25 @@ void test_folders()
     if (firstDepthNodes == NULL)
     {
         freeFolderTree(root);
-        return 1;
+        return;
     }
 
     // Connect them to root
     connectRootToFirstDepth(root, firstDepthNodes, firstDepthCount);
 
-    //processEachFolderWithTree(firstDepthNodes, firstDepthCount, "./Root");
     // Create the folders on disk
     printf("\nCreating folder structure on disk:\n");
     createFolders(root, ".");
 
+    // Process each first-depth folder with the tree generator
+    processEachFolderWithTree(firstDepthNodes, firstDepthCount, "./Projekt");
+
     // Clean up memory
     freeFolderTree(root);
 
-
     printf("\nFolder structure created successfully!\n");
 }
+
 
 void generateRandomFilename(char* buffer, int bufferSize)
 {
@@ -202,18 +196,28 @@ void generateRandomFilename(char* buffer, int bufferSize)
     snprintf(buffer, bufferSize, "%s_%d.txt", prefix, randomNum);
 }
 
-/*void processEachFolderWithTree(FolderNode** folders, int count, char* basePath)
+void processEachFolderWithTree(FolderNode** folders, int count, char* basePath)
 {
     printf("\n=== Creating Tree Structures for Each First-Depth Folder ===\n");
 
+    // Seed the random number generator if not already done
+    srand((unsigned int)time(NULL));
+
     // Allocate array to store tree pointers for each folder
     Tree** folderTrees = (Tree**)malloc(count * sizeof(Tree*));
-    if (folderTrees == NULL) {
+    if (folderTrees == NULL)
+    {
         printf("Failed to allocate memory for tree pointers\n");
         return;
     }
 
-    for (int i = 0; i < count; i++) 
+    // Initialize all tree pointers to NULL
+    for (int i = 0; i < count; i++)
+    {
+        folderTrees[i] = NULL;
+    }
+
+    for (int i = 0; i < count; i++)
     {
         char folderPath[256];
         sprintf(folderPath, "%s/%s", basePath, folders[i]->name);
@@ -221,73 +225,101 @@ void generateRandomFilename(char* buffer, int bufferSize)
         printf("\n[Folder %d: %s]\n", i + 1, folders[i]->name);
         printf("  Path: %s\n", folderPath);
 
-        // OPTION 1: If they have a function that creates a tree from a path
-        // This assumes their function returns a Tree* pointer
-        folderTrees[i] = OtherTree_CreateFromPath(folderPath);
-
-        if (folderTrees[i] != NULL) 
+        // Create a Tree structure for this folder
+        folderTrees[i] = (Tree*)malloc(sizeof(Tree));
+        if (folderTrees[i] == NULL)
         {
-            printf("Tree created successfully for %s\n", folders[i]->name);
-            printf("Tree pointer (pTree): %p\n", (void*)folderTrees[i]);
-
-            // OPTION 2: If they need to add data to their tree
-            // OtherTree_AddFolderData(folderTrees[i], folders[i]);
-
-            // OPTION 3: If they need to process subfolders
-            if (folders[i]->numberOfChildren > 0) 
-            {
-                printf("  This folder has %d subfolders that can be added to the tree\n",
-                    folders[i]->numberOfChildren);
-
-                // Example of adding subfolders to their tree
-                for (int j = 0; j < folders[i]->numberOfChildren; j++) 
-                {
-                    char subPath[256];
-                    sprintf(subPath, "%s/%s", folderPath, folders[i]->children[j]->name);
-                    printf("    Adding subfolder: %s\n", folders[i]->children[j]->name);
-
-                    // Call their function to add a child to the tree
-                    // OtherTree_AddChild(folderTrees[i], folders[i]->children[j]->name, subPath);
-                }
-            }
-
-            // OPTION 4: If they have a function to process the entire tree
-            // OtherTree_Process(folderTrees[i]);
-
+            printf("  Failed to allocate memory for tree\n");
+            continue;
         }
-        else 
+        folderTrees[i]->pHead = NULL;
+
+        // Prepare the data for the root node
+        Data rootData;
+        strcpy(rootData.dirName, folders[i]->name);
+
+        // Generate random filenames
+        char filename1[50], filename2[50];
+        generateRandomFilename(filename1, sizeof(filename1));
+        generateRandomFilename(filename2, sizeof(filename2));
+        strcpy(rootData.fileName1, filename1);
+        strcpy(rootData.fileName2, filename2);
+
+        printf("  Creating tree for %s with depth ", folders[i]->name);
+
+        // Generate tree with random depth (1-3 levels deep)
+        int treeDepth = (rand() % 3) + 1;  // Random depth between 1 and 3
+        printf("%d\n", treeDepth);
+
+        // Call generateTree to create the tree structure
+        generateTree(&(folderTrees[i]->pHead), &rootData, treeDepth);
+
+        if (folderTrees[i]->pHead != NULL)
         {
-            printf("Failed to create tree for %s\n", folders[i]->name);
+            printf("  Tree created successfully for %s\n", folders[i]->name);
+            printf("  Tree contents:\n");
+            printTree(folderTrees[i]->pHead, 1);  // Print with 1 tab indentation
+        }
+        else
+        {
+            printf("  Failed to create tree for %s\n", folders[i]->name);
+        }
+
+        // If this folder has subfolders, we could add them to the tree too
+        if (folders[i]->numberOfChildren > 0)
+        {
+            printf("  This folder has %d subfolders\n", folders[i]->numberOfChildren);
+
+            // You could extend this to add the subfolders to the tree
+            // This would require modifications to the generateTree function
+            // to accept multiple Data structures
         }
 
         printf("  ----------------------------------------\n");
     }
 
-    // Now all trees are created, you can work with them
-
-    // Example: Access each folder's tree
+    // Print summary of created trees
     printf("\n=== Summary of Created Trees ===\n");
-    for (int i = 0; i < count; i++) 
+    for (int i = 0; i < count; i++)
     {
-        if (folderTrees[i] != NULL) 
+        if (folderTrees[i] != NULL && folderTrees[i]->pHead != NULL)
         {
-            printf("Folder %d: %s - Tree at %p\n",
-                i + 1, folders[i]->name, (void*)folderTrees[i]);
+            printf("Folder %d: %s - Tree created\n", i + 1, folders[i]->name);
+        }
+        else
+        {
+            printf("Folder %d: %s - No tree created\n", i + 1, folders[i]->name);
         }
     }
-    //
+
+    // Clean up
     printf("\n=== Cleaning Up Trees ===\n");
-    for (int i = 0; i < count; i++) 
+    for (int i = 0; i < count; i++)
     {
-        if (folderTrees[i] != NULL) 
+        if (folderTrees[i] != NULL)
         {
-            // Call their free function
-            // OtherTree_Free(folderTrees[i]);
-            printf("Freed tree for Folder %d\n", i + 1);
+            // Note: You might want to add a freeTree function in treeminus.h
+            // For now, we'll just free the Tree structure
+            // The nodes themselves would need proper freeing
+            free(folderTrees[i]);
+            printf("Freed tree structure for Folder %d\n", i + 1);
         }
     }
 
     free(folderTrees);
 }
-*/
+
+void freeTree(Node* pNode)
+{
+    if (pNode == NULL)
+        return;
+
+    // Recursively free all children
+    if (pNode->pNext1) freeTree(pNode->pNext1);
+    if (pNode->pNext2) freeTree(pNode->pNext2);
+    if (pNode->pNext3) freeTree(pNode->pNext3);
+
+    // Free the current node
+    free(pNode);
+}
 
