@@ -134,7 +134,6 @@
     <ClCompile Include="file_functions.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="Tree.c" />
-    <ClCompile Include="tree.c" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="noah.txt" />
