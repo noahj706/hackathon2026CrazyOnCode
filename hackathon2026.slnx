@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="hackathon2026/hackathon2026.vcxproj" />
+  <Project Path="hackathon2026/hackathon2026.vcxproj" Id="7c87d153-7f79-46f7-bc3d-1262ef7da81c" />
 </Solution>

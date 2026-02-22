@@ -1,0 +1,10 @@
+Every random node deletes data
+Every small file writes data
+Each old data generates data
+Every large feature generates data
+Each new feature creates data
+This fast node writes data
+A old data generates data
+A large node reads data
+A new system generates data
+Each fast system reads data

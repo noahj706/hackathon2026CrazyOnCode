@@ -13,13 +13,26 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Zack_Region">
+      <UniqueIdentifier>{2f8fcd9a-42fe-4754-aad8-cbe9a8a834fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="file_functions.c">
+      <Filter>Source Files\Zack_Region</Filter>
+    </ClCompile>
     <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="zack.txt" />
+    <Text Include="zack.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="file_in_node.h">
+      <Filter>Source Files\Zack_Region</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
