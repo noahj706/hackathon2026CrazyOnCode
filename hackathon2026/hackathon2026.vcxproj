@@ -128,12 +128,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
+    <ClCompile Include="tree.c" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CanYouC.txt" />
     <Text Include="CText.txt" />
     <Text Include="zack.txt" />
     <Text Include="noah.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="tree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
