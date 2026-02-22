@@ -134,6 +134,7 @@
     <ClCompile Include="file_functions.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="Tree.c" />
+    <ClCompile Include="tree.c" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="noah.txt" />
@@ -145,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="file_in_node.h" />
+    <ClInclude Include="tree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

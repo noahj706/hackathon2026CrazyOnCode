@@ -30,6 +30,8 @@
       <Filter>Source Files</Filter>
     <ClCompile Include="gui.c">
       <Filter>Source Files\gui</Filter>
+    <ClCompile Include="tree.c">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +55,11 @@
   <ItemGroup>
     <ClInclude Include="file_in_node.h">
       <Filter>Source Files\Zack_Region</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="tree.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
