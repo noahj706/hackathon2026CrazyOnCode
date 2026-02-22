@@ -1,3 +1,4 @@
+#include "gui.h"
 #include "parent.h"
 FolderNode* createNode(char* name)
 {
@@ -117,17 +118,17 @@ void test_folders()
 {
     int userChoice;
     int firstDepthCount;
-    FolderNode* root = createNode("Project");
+    FolderNode* root = createNode("Projekt");
 
-    printf("Choose folder structure size:\n");
+    /*printf("Choose folder structure size:\n");
     printf("1. Small (3 first-depth folders)\n");
     printf("2. Medium (5 first-depth folders)\n");
     printf("3. Large (7 first-depth folders)\n");
     printf("Enter your choice (1-3): ");
-    scanf("%d", &userChoice);
+    scanf("%d", &userChoice);*/
 
     // Determine first depth count based on user choice
-    switch (userChoice)
+    switch (buttonMenu())
     {
     case SMALL:
         firstDepthCount = 5;
@@ -196,7 +197,8 @@ void test_folders()
         // This assumes their function returns a Tree* pointer
         folderTrees[i] = OtherTree_CreateFromPath(folderPath);
 
-        if (folderTrees[i] != NULL) {
+        if (folderTrees[i] != NULL) 
+        {
             printf("  ✓ Tree created successfully for %s\n", folders[i]->name);
             printf("  Tree pointer (pTree): %p\n", (void*)folderTrees[i]);
 
