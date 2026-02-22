@@ -9,17 +9,20 @@ FolderNode* createNode(char* name)
         return NULL;
     }
     strcpy(newNode->name, name);
-    newNode->children = NULL;
+    newNode->children = NULL; 
     newNode->numberOfChildren = 0;
     return newNode;
 }
 
 void addChild(struct FolderNode* parent, struct FolderNode* child)
 {
-    if (parent == NULL || child == NULL) return;
+    if (parent == NULL || child == NULL)
+    {
+        return;
+    }
 
     parent->numberOfChildren++;
-    parent->children = realloc(parent->children, parent->numberOfChildren * sizeof(FolderNode*));
+    parent->children = (struct FolderNode*)realloc(parent->children, parent->numberOfChildren * sizeof(FolderNode*));
     if (parent->children == NULL) 
     {
         printf("Memory reallocation failed\n");
@@ -31,7 +34,10 @@ void addChild(struct FolderNode* parent, struct FolderNode* child)
 
 void createFolders(struct FolderNode* root, char* parentPath)
 {
-    if (root == NULL) return;
+    if (root == NULL)
+    {
+        return;
+    }
 
     char currentPath[256];
     sprintf(currentPath, "%s/%s", parentPath, root->name);
@@ -40,7 +46,8 @@ void createFolders(struct FolderNode* root, char* parentPath)
     {
         printf("Created: %s\n", currentPath);
     }
-    else {
+    else 
+    {
         printf("Failed to create or already exists: %s\n", currentPath);
     }
 
@@ -73,7 +80,10 @@ FolderNode** createFirstDepthNodes(int count)
 // Clean up first depth nodes
 void destroyFirstDepthNodes(FolderNode** nodes, int count) 
 {
-    if (nodes == NULL) return;
+    if (nodes == NULL)
+    {
+        return;
+    }
 
     for (int i = 0; i < count; i++) 
     {
@@ -84,7 +94,10 @@ void destroyFirstDepthNodes(FolderNode** nodes, int count)
 
 void connectRootToFirstDepth(FolderNode* root, FolderNode* firstDepthNodes[], int numberOfFirstDepthNodes)
 {
-    if (root == NULL) return;
+    if (root == NULL)
+    {
+        return 1;
+    }
 
     // Clear existing children if any
     if (root->children != NULL)
@@ -163,8 +176,8 @@ void test_folders()
     connectRootToFirstDepth(root, firstDepthNodes, firstDepthCount);
 
     //processEachFolderWithTree(firstDepthNodes, firstDepthCount, "./Root");
-    // Create the actual folders on disk
-    printf("\nCreating actual folder structure on disk:\n");
+    // Create the folders on disk
+    printf("\nCreating folder structure on disk:\n");
     createFolders(root, ".");
 
     // Clean up memory
@@ -172,6 +185,21 @@ void test_folders()
 
 
     printf("\nFolder structure created successfully!\n");
+}
+
+void generateRandomFilename(char* buffer, int bufferSize)
+{
+    const char* prefixes[] = { "doc", "notes", "list", "data", "info", "license", "readme" };
+    int numPrefixes = sizeof(prefixes) / sizeof(prefixes[0]);
+
+    // Generate a random number between 1 and 999
+    int randomNum = (rand() % 999) + 1;
+
+    // Picks a random prefix
+    const char* prefix = prefixes[rand() % numPrefixes];
+
+    // Create the filename: prefix_randomNumber.txt
+    snprintf(buffer, bufferSize, "%s_%d.txt", prefix, randomNum);
 }
 
 /*void processEachFolderWithTree(FolderNode** folders, int count, char* basePath)
@@ -199,8 +227,8 @@ void test_folders()
 
         if (folderTrees[i] != NULL) 
         {
-            printf("  ✓ Tree created successfully for %s\n", folders[i]->name);
-            printf("  Tree pointer (pTree): %p\n", (void*)folderTrees[i]);
+            printf("Tree created successfully for %s\n", folders[i]->name);
+            printf("Tree pointer (pTree): %p\n", (void*)folderTrees[i]);
 
             // OPTION 2: If they need to add data to their tree
             // OtherTree_AddFolderData(folderTrees[i], folders[i]);
@@ -229,7 +257,7 @@ void test_folders()
         }
         else 
         {
-            printf("  ✗ Failed to create tree for %s\n", folders[i]->name);
+            printf("Failed to create tree for %s\n", folders[i]->name);
         }
 
         printf("  ----------------------------------------\n");
@@ -247,8 +275,7 @@ void test_folders()
                 i + 1, folders[i]->name, (void*)folderTrees[i]);
         }
     }
-
-    // Later, when done, free all the trees
+    //
     printf("\n=== Cleaning Up Trees ===\n");
     for (int i = 0; i < count; i++) 
     {
