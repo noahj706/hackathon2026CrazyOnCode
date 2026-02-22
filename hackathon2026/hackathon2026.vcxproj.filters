@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\gui">
+      <UniqueIdentifier>{eef15b4b-aa3c-43a2-b6a4-0b208c9a8cf1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -20,15 +23,20 @@
     </ClCompile>
     <ClCompile Include="Tree.c">
       <Filter>Source Files</Filter>
+    <ClCompile Include="gui.c">
+      <Filter>Source Files\gui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="CanYouC.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="zack.txt" />
     <Text Include="noah.txt" />
-    <Text Include="CText.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="gui.h">
+      <Filter>Source Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\raygui-4.0\src\raygui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="parent.h">
