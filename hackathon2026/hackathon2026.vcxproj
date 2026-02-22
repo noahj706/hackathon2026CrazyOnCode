@@ -105,7 +105,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)hackathon2026\lib\raylib-5.5_win64_msvc16\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)hackathon2026\lib\raylib-5.5_win64_msvc16\include;$(SolutionDir)hackathon2026\lib\raygui-4.0\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,10 +130,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="gui.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="noah.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="gui.h" />
+    <ClInclude Include="lib\raygui-4.0\src\raygui.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
