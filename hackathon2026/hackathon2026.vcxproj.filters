@@ -15,9 +15,14 @@
     </Filter>
     <Filter Include="Source Files\gui">
       <UniqueIdentifier>{eef15b4b-aa3c-43a2-b6a4-0b208c9a8cf1}</UniqueIdentifier>
+    <Filter Include="Source Files\Zack_Region">
+      <UniqueIdentifier>{2f8fcd9a-42fe-4754-aad8-cbe9a8a834fa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="file_functions.c">
+      <Filter>Source Files\Zack_Region</Filter>
+    </ClCompile>
     <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -41,6 +46,13 @@
   <ItemGroup>
     <ClInclude Include="parent.h">
       <Filter>Header Files</Filter>
+    <Text Include="zack.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="file_in_node.h">
+      <Filter>Source Files\Zack_Region</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

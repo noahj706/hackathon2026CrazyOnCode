@@ -131,6 +131,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="gui.c" />
+    <ClCompile Include="file_functions.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="Tree.c" />
   </ItemGroup>
@@ -141,6 +142,9 @@
     <ClInclude Include="parent.h" />
     <ClInclude Include="gui.h" />
     <ClInclude Include="lib\raygui-4.0\src\raygui.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="file_in_node.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
